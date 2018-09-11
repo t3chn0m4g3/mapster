@@ -1,27 +1,26 @@
-require('plugins/mapster/mapster.less');
-require('plugins/mapster/lib/mapster_controller.js');
-require('plugins/mapster/lib/mapster_directive.js');
-require('plugins/mapster/mapster_params_editor.js');
+import './mapster.less';
+import './lib/mapster_controller.js';
+import './lib/mapster_directive.js';
+import './mapster_params_editor.js';
 import 'ui/visualize/visualize_legend';
 import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
-import { VisSchemasProvider } from 'ui/vis/schemas';
-import { TemplateVisTypeProvider } from 'ui/template_vis_type/template_vis_type';
+import { VisFactoryProvider } from 'ui/vis/vis_factory';
+import { Schemas } from 'ui/vis/editors/default/schemas'
+import { CATEGORY } from 'ui/vis/vis_category';
 import MapsterTemplate from 'plugins/mapster/mapster.html';
-import MapsterParamsEditor from 'plugins/mapster/mapster_params_editor.html'
+import MapsterParamTemplate from 'plugins/mapster/mapster_params_editor.html';
+import { Status } from 'ui/vis/update_status';
 
-function mapsterProvider(Private) {
-  // var TemplateVisType = Private(require('ui/template_vis_type/template_vis_type'));
-  // var Schemas = Private(require('ui/vis/schemas'));
-  const TemplateVisType = Private(TemplateVisTypeProvider);
-  const Schemas = Private(VisSchemasProvider);
+const mapsterProvider = (Private) => {
+  const VisFactory = Private(VisFactoryProvider);
 
-  return new TemplateVisType({
+  return VisFactory.createAngularVisualization({
     name: 'mapster',
     title: 'Mapster',
     description: 'MAPSTER MUCH PIEW MUCH WOW',
     icon: 'fa-globe',
-    template: MapsterTemplate,
-    params: {
+    category: CATEGORY.OTHER,
+    visConfig: {
       defaults: {
         /* GENERAL */
         globe: true,
@@ -47,9 +46,12 @@ function mapsterProvider(Private) {
         ExplosionDelay: 2700,
         maximumEvents: 10
       },
-      editor: MapsterParamsEditor
+      template: MapsterTemplate,
     },
-    schemas: new Schemas([
+    //requiresUpdateStatus: [Status.AGGS, Status.PARAMS, Status.RESIZE, Status.UI_STATE],
+    editorConfig: {
+      optionsTemplate: MapsterParamTemplate,
+      schemas: new Schemas([
         {
           group: 'metrics',
           name: 'count',
@@ -96,21 +98,15 @@ function mapsterProvider(Private) {
           name: 'target',
           title: 'Target location',
           icon: 'fa fa-dot-circle-o',
+          aggFilter: 'geohash_grid',
           min: 0,
           max: 1
-        },
-        //FIXME I don't know why but it looks like extra buckets are useless to filter with another field.
-        {
-          group: 'buckets',
-          name: 'extra',
-          title: 'Extra data to filter',
-          icon: 'fa fa-database',
-          min: 0,
-          max: 10
         }
-    ])
+      ])
+    },
+    responseHandler: 'none',
+    //responseHandler: 'tabify'
   });
-}
+};
 
 VisTypesRegistryProvider.register(mapsterProvider);
-// require('ui/registry/vis_types').register(mapsterProvider);
