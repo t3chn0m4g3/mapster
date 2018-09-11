@@ -1,0 +1,90 @@
+/******************
+******* Map *******
+******************/
+.map {
+  display: flex;
+  flex: 1 1 100%;
+  position: relative;
+}
+
+#mapster-legend {
+  position: absolute;
+  bottom: 0;
+}
+
+mapster {
+  width: 99%;
+  height: 99%;
+}
+
+.country {
+  fill: #555;
+  stroke: white;
+  stroke-width: 0.5;
+}
+
+.country:hover {
+  fill: #fb4;
+}
+
+.route {
+  opacity: 1;
+  fill: none;
+  stroke-width: 1;
+}
+
+.origin {
+  opacity: 1;
+}
+
+.halo {
+  opacity: 1;
+  fill: none;
+  stroke: white;
+  stroke-width: 1;
+}
+
+/******************
+*** Logs table ***
+******************/
+.logs {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: Montserrat, sans-serif;
+  width: 50%;
+}
+
+.logs table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.logs thead {
+  color: #dd5;
+}
+
+.logs td {
+  padding-right: 10px;
+}
+
+/****************
+* Params editor *
+****************/
+.mapster_helper {
+    font-weight: normal;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bcdff1;
+    padding: 5px;
+}
+
+.help_icon {
+    color: #31708f;
+    font-size: 15px;
+}
+
+.help_icon:hover {
+    color: #ee8811;
+}
+
