@@ -2,11 +2,9 @@ import './mapster.less';
 import './lib/mapster_controller.js';
 import './lib/mapster_directive.js';
 import './mapster_params_editor.js';
-import '/usr/share/kibana/src/ui/public/vis/vis_types/vislib_vis_legend.js';
-import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
 import { VisFactoryProvider } from 'ui/vis/vis_factory';
+import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
 import { Schemas } from 'ui/vis/editors/default/schemas'
-import { CATEGORY } from 'ui/vis/vis_category';
 import MapsterTemplate from 'plugins/mapster/mapster.html';
 import MapsterParamTemplate from 'plugins/mapster/mapster_params_editor.html';
 import { Status } from 'ui/vis/update_status';
