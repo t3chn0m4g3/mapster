@@ -2,7 +2,7 @@ import './mapster.less';
 import './lib/mapster_controller.js';
 import './lib/mapster_directive.js';
 import './mapster_params_editor.js';
-import 'ui/visualize/visualize_legend';
+import '/usr/share/kibana/src/ui/public/vis/vis_types/vislib_vis_legend.js';
 import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
 import { VisFactoryProvider } from 'ui/vis/vis_factory';
 import { Schemas } from 'ui/vis/editors/default/schemas'
